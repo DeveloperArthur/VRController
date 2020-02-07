@@ -24,25 +24,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void chamarTelaCalculo(View view) {
-        Intent it = new Intent(this, CalculoActivity.class);
-        double valorVR = 0;
-        double valorDia = 0;
+        System.out.println("ValorVR: " + this.valorVR.getText().toString());
+        System.out.println("ValorDia: " + this.valorDia.getText().toString());
 
-        if (this.valorVR.getText().toString() == null || this.valorDia.getText().toString() == null) {
-            this.erro.setText("ERRO: Preencha os campos acima");
+        if (this.valorVR.getText().toString().equals("") || this.valorDia.getText().toString().equals("")) {
+            this.erro.setText("ERRO#1: Todos os campos são obrigatórios");
             this.erro.setTextColor(Color.RED);
-        }else{
+        } else if (Double.parseDouble(this.valorVR.getText().toString()) < 0 || Double.parseDouble(this.valorDia.getText().toString()) < 0) {
+            this.erro.setText("ERRO#2: Campos preenchidos são inválidos");
+            this.erro.setTextColor(Color.RED);
+        } else {
+            Intent it = new Intent(this, CalculoActivity.class);
+
+            double valorVR = 0;
+            double valorDia = 0;
+
             this.erro.setText("");
-            try{
-                valorVR = Double.parseDouble(this.valorVR.getText().toString());
-                valorDia = Double.parseDouble(this.valorDia.getText().toString());
+            valorVR = Double.parseDouble(this.valorVR.getText().toString());
+            valorDia = Double.parseDouble(this.valorDia.getText().toString());
 
-                it.putExtra("valorVR", valorVR);
-                it.putExtra("valorDia", valorDia);
+            it.putExtra("valorVR", valorVR);
+            it.putExtra("valorDia", valorDia);
 
-                startActivity(it);
-            }catch ()
-
+            startActivity(it);
         }
     }
 }

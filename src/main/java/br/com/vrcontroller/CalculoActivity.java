@@ -3,10 +3,10 @@ package br.com.vrcontroller;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 public class CalculoActivity extends AppCompatActivity {
     public TextView resultado;
@@ -22,26 +22,32 @@ public class CalculoActivity extends AppCompatActivity {
         if (bundle != null) {
             valorDia = bundle.getDouble("valorDia");
             valorVR = bundle.getDouble("valorVR");
-            this.calcular(valorDia, valorVR);
+            this.calcularDiasParaUsarVR(valorDia, valorVR);
         }
     }
 
-    public void calcular(double valorDia, double valorVR) {
-        GregorianCalendar calendario = new GregorianCalendar();
+    public void calcularDiasParaUsarVR(double valorDia, double valorVR) {
+        if (valorVR < valorDia) {
+            this.resultado.setText("Saldo insuficiente para almoçar");
+        } else {
+            Calendar calendario = Calendar.getInstance();
 
-        int diaAtual = calendario.get(GregorianCalendar.DAY_OF_MONTH);
-        int ultimoDia = calendario.getActualMaximum(Calendar.DAY_OF_MONTH);
+            int diaAtual = calendario.get(Calendar.DAY_OF_MONTH);
+            int ultimoDia = calendario.getActualMaximum(Calendar.DAY_OF_MONTH);
 
-        double aux = valorVR;
-        int diaQueOVRAcaba = 0;
-
-        for (int i = diaAtual; i <= ultimoDia; i++) {
-            aux = aux - valorDia;
-            if (aux > 0) {
-                System.out.println("LOG: DIA " + i + " VALOR ATUAL == " + aux);
-                diaQueOVRAcaba = i;
-            } else break;
+            double aux = valorVR;
+            int diaQueOVRAcaba = 0;
+            for (int i = diaAtual; i <= ultimoDia; i++) {
+                if (calendario.get(Calendar.DAY_OF_WEEK) != 7 && calendario.get(Calendar.DAY_OF_WEEK) != 1) {
+                    aux = aux - valorDia;
+                    if (aux >= 0) {
+                        System.out.println("LOG: DIA " + i + " VALOR ATUAL == " + aux);
+                        diaQueOVRAcaba = i;
+                    } else break;
+                }
+                calendario.add(Calendar.DAY_OF_MONTH, 1);
+            }
+            this.resultado.setText("Voce poderá almocar por esse valor até dia " + diaQueOVRAcaba + " desse mês!");
         }
-        this.resultado.setText("Voce podera almocar por esse valor ate dia " + diaQueOVRAcaba);
     }
 }
