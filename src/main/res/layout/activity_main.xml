@@ -6,61 +6,74 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!--    <ImageView-->
+    <!--        android:layout_width="251dp"-->
+    <!--        android:layout_height="211dp"-->
+    <!--        android:src="@drawable/control"-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/valorDia"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
     <Button
         android:id="@+id/button"
-        android:layout_width="266dp"
+        android:layout_width="0dp"
         android:layout_height="70dp"
-        android:layout_marginBottom="77dp"
-        android:text="Calcular"
+        android:layout_marginStart="72dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginBottom="32dp"
         android:onClick="chamarTelaCalculo"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Calcular"
+        app:layout_constraintBottom_toTopOf="@+id/erro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/valorDia" />
-
-    <EditText
-        android:id="@+id/valorVR"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Qual atual saldo do seu VR?"
-        android:inputType="numberDecimal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.661"></EditText>
-
-    <EditText
-        android:id="@+id/valorDia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="288dp"
-        android:layout_marginBottom="135dp"
-        android:hint="Quanto pretende gastar por dia?"
-        android:inputType="numberDecimal"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.517"></EditText>
-
-    <ImageView
-        android:layout_width="251dp"
-        android:layout_height="211dp"
-        android:src="@drawable/control"
-        app:layout_constraintBottom_toTopOf="@+id/valorDia"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
     <TextView
         android:id="@+id/erro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="72dp"
         android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <EditText
+        android:id="@+id/valorVR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginBottom="29dp"
+        android:hint="Qual atual saldo do seu VR?"
+        android:inputType="numberDecimal"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox"
+        app:layout_constraintStart_toStartOf="@+id/checkBox"
+        app:layout_constraintTop_toBottomOf="@+id/valorDia"></EditText>
+
+    <EditText
+        android:id="@+id/valorDia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="170dp"
+        android:layout_marginBottom="41dp"
+        android:hint="Quanto pretende gastar por dia?"
+        android:inputType="numberDecimal"
+        app:layout_constraintBottom_toTopOf="@+id/valorVR"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></EditText>
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="48dp"
+        android:text="Já almocei hoje!"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintStart_toStartOf="@+id/button"
         app:layout_constraintTop_toBottomOf="@+id/valorVR" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
