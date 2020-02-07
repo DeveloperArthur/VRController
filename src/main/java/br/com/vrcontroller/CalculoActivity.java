@@ -11,6 +11,7 @@ import java.util.Calendar;
 public class CalculoActivity extends AppCompatActivity {
     public TextView resultado;
     double valorDia, valorVR;
+    boolean jaAlmocou;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +23,12 @@ public class CalculoActivity extends AppCompatActivity {
         if (bundle != null) {
             valorDia = bundle.getDouble("valorDia");
             valorVR = bundle.getDouble("valorVR");
-            this.calcularDiasParaUsarVR(valorDia, valorVR);
+            jaAlmocou = bundle.getBoolean("jaAlmocou");
+            this.calcularDiasParaUsarVR(valorDia, valorVR, jaAlmocou);
         }
     }
 
-    public void calcularDiasParaUsarVR(double valorDia, double valorVR) {
+    public void calcularDiasParaUsarVR(double valorDia, double valorVR, boolean jaAlmocou) {
         if (valorVR < valorDia) {
             this.resultado.setText("Saldo insuficiente para almoçar");
         } else {
@@ -34,6 +36,9 @@ public class CalculoActivity extends AppCompatActivity {
 
             int diaAtual = calendario.get(Calendar.DAY_OF_MONTH);
             int ultimoDia = calendario.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+            if (jaAlmocou)
+                diaAtual++;
 
             double aux = valorVR;
             int diaQueOVRAcaba = 0;
